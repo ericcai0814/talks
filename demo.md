@@ -243,6 +243,16 @@ export default {
 }
 ```
 
+```ts {monaco}
+import { ref } from 'vue'
+
+let foo = 0
+let bar = ref(0)
+
+foo = 1
+bar = 1 // ts-error
+```
+
 Non-code blocks are ignored.
 
 ```vue
