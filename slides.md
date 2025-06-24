@@ -6,7 +6,6 @@ theme: seriph
 # like them? see https://unsplash.com/collections/94734566/slidev
 css: unocss
 colorSchema: dark
-glowSeed: 4
 remoteAssets: true
 
 # some information about your slides (markdown enabled)
@@ -32,7 +31,7 @@ layout: cover
 ---
 
 # 前端測試進程報告與問題研討
-<Glow />
+<Glow :glowSeed="false"/>
 
 前端測試研究 & 意見調查 & 下一步評估
 
@@ -61,111 +60,73 @@ hideInToc: true
 }
 </style>
 
+
 ---
 
-# 前端測試的理解 - 問卷訪談
+# 我們對單元測試的初步理解
 <Glow glow="bottom-right" />
 
-為了更了解每一位前端成員對於「前端測試」的個人見解，我們在 5/13 展開問卷調查，蒐集團隊成員學習前端測試至今的理解。
+為了更了解每一位前端成員對於「前端測試」的個人見解，我們在 2025/5/13 展開問卷調查，蒐集團隊成員學習前端測試至今的理解。
 
-**歷程：**
+<ul>
+  <li>
+    2025/05/13 ～ 2025/05/15 問卷調查
+  </li>
+  <li>
+    2025/05/15 針對問卷調查內容與前端團隊同步討論
+  </li>
+</ul>
 
-- 2025/05/13 ～ 2025/05/15 問卷調查
-- 2025/05/15 針對問卷調查內容與前端團隊同步討論
 
- [learn more](https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c)
+[learn more](https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c)
 
-<!-- https://sli.dev/guide/animations.html#click-animation -->
+<!-- 結合問卷與概念導入 -->
+
+
+---
+layout: center
+---
+
+<Glow glow="top" />
+
+<div flex="~ col items-center justify-center w-full">
+
+  <h2 flex="~ col" text-center>
+    <div text-center flex="col gap-2" transition duration-500 :class="$clicks < 2 ? 'translate-y-20' : ''">
+      <span
+        flex="~ gap-2 items-center justify-center"
+        text-hex-0e8e85 transition duration-500 text-1.5em
+        :class="$clicks < 1 ? 'scale-150' : ''"
+      >
+        我們實際做了什麼？
+      </span>
+    </div>
+  </h2>
+
+  <div grid="~ cols-2 gap-4" mt4 w-full>
+    <div v-click="3" forward:delay-400 flex="~ col items-center gap-2" transition duration-500>
+      <p>11 次 讀書會</p>
+    </div>
+    <div v-click="3" forward:delay-400 flex="~ col items-center gap-2" transition duration-500>
+      <p>1 次 問卷調查</p>
+    </div>
+    <div v-click="3" forward:delay-400 flex="~ col items-center gap-2" transition duration-500>
+      <p>5 次 個人訪談調查</p>
+    </div>
+    <div v-click="3" forward:delay-400 flex="~ col items-center gap-2" transition duration-500>
+      <p>9 次 討論會議</p>
+    </div>
+  </div>
+</div>
+
 
 ---
 
-# 前端測試共識
-<Glow glow="center" />
-
-<div class="grid grid-cols-2 gap-x-8">
-<div>
-  <div v-click class="p-2">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試目的與價值認知一致
-    </div>
-    <div class="text-sm opacity-50">
-    團隊普遍認同前端測試的核心目的是確保程式碼品質、減少人為錯誤，並透過自動化檢測來維護商業邏輯的正確性。大家都理解測試能夠避免「改A壞B」的問題。
-    </div>
-  </div>
-
-  <div v-click class="p-2 mt-4">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試必要性需依專案性質評估
-    </div>
-    <div class="text-sm opacity-50">
-    團隊達成共識：並非所有專案都需要相同程度的測試。應該以「影響使用者權益程度」、「專案複雜度」、「風險程度」作為評估基準，關鍵邏輯和核心功能優先實施測試。
-    </div>
-  </div>
-
-  <div v-click class="p-2 mt-4">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試扮演品質守門員角色
-    </div>
-    <div class="text-sm opacity-50">
-    大家一致認為測試在開發流程中扮演「監督者」、「守門員」、「保護者」的角色，能夠在CI/CD流程中進行品質控管，確保程式碼變更的可預測性。
-    </div>
-  </div>
-
-  <div v-click class="p-2 mt-4">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試促進跨部門協作
-    </div>
-    <div class="text-sm opacity-50">
-    團隊認同測試能夠成為與QA溝通的共同語言，提供測試文件和規格作為交付佐證，強化跨部門協作效率，降低交接成本。
-    </div>
-  </div>
-</div>
-
-<div>
-  <div v-click class="p-2">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      開發成本與效益需要平衡
-    </div>
-    <div class="text-sm opacity-50">
-    所有成員都意識到測試會增加初期開發時程和學習成本，但長期來看能提升開發效率和程式碼穩定性。團隊同意需要根據專案資源和時程壓力來調整測試涵蓋範圍。
-    </div>
-  </div>
-
-  <div v-click class="p-2 mt-4">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試推動程式碼模組化設計
-    </div>
-    <div class="text-sm opacity-50">
-    團隊理解測試能夠反向檢驗程式碼設計，促使開發者注意單一職責原則和程式碼顆粒度，難以測試的程式碼往往代表設計需要優化。
-    </div>
-  </div>
-
-  <div v-click class="p-2 mt-4">
-    <div class="text-lg font-bold flex items-center gap-2 opacity-70">
-      <carbon:cube />
-      測試工具與流程需要團隊統一標準
-    </div>
-    <div class="text-sm opacity-50">
-    雖然大家對測試價值有共識，但也認知到需要建立統一的測試工具、流程和標準，才能降低學習成本和溝通成本，避免不同人對測試範圍認知的差異。
-    </div>
-  </div>
-</div>
-
-</div>
-
----
-
-# 目前的執行狀況 - 會議
+# 前端測試導入行動紀錄總覽
 
 <Glow glow="top-right" />
 
-<div v-click class="h-[90dvh] max-h-[100%] overflow-y-auto">
+<div class="h-[90dvh] max-h-[100%] overflow-y-auto">
 
 | 會議內容 | 日期 |
 |---|---|
@@ -225,27 +186,102 @@ hideInToc: true
 }
 </style>
 
+<!-- 描述讀書會、學習歷程與推進進度 -->
+
 ---
 
-# 目前的執行狀況 - 讀書會
+# 讀書會
+<Glow glow="top-right" />
+
 我們認為應該培養對於前端測試的基本認知與技術熟悉度，才能有效評估前端測試導入對於團隊的價值
 
 初期我們選用 [《前端測試指南：策略與實踐》(Frontend Testing Guide: Strategies and Practices)](https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/) 作為初探前端測試的敲門磚。
 
 
-2025/2/10 - 2025/2/19 Vicky、Eric 開始自學測試相關知識，從《前端測試指南：策略與實踐》撰寫[學習文件](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c)
+2025/2/10 - 2025/2/19 開始自學測試相 關知識，從《前端測試指南：策略與實踐》撰寫[學習文件](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c)
 
 2025/02/21 - 首次與團隊分享[前端測試的種類](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d)
 
-<Glow glow="top-right" />
+
+
+<!-- 描述讀書會、學習歷程與推進進度 -->
+
 
 
 ---
 
-# 執行到至今，有哪些問題或疑問 - 個人訪談
+# 我們遇到了哪些問題？
 <Glow glow="bottom-right" />
 
 第一次問卷調查後，我們發現團隊成員對於導入測試的態度不一，所以為了提煉更深入的聲音，我們進行了第二次的訪談，這次與上次不同的是以「個人訪談」的方式進行，為了讓每一個人能說出最真實的想法。
 
 - 2025/06/09 ～ 2025/06/11 針對小組成員一對一訪談
 - 2025/06/18 同步「一對一訪談」整理後結果
+
+<a target="_blank"  href="https://www.notion.so/ewill-software/All-Meeting-Data-200d6e303b5c809caea4dabcb9caab87">
+  Read more in the docs
+</a>
+
+<div mt-10  flex="~ justify-center">
+  <span  v-mark="{ at: 2, type: 'circle', color: '#0e8e85' }">
+    <div v-click="1" w-180 h-30 py-4 px-10 flex="~ items-center justify-center">
+      從訪談內容可以看出，雖然團隊成員對測試的具體實施方式有不同看法，但在核心問題上已經形成了相當程度的共識。
+    </div>  
+  </span>
+</div>
+
+
+<!-- 結合訪談與反思，鋪陳未來方向 -->
+
+---
+
+# 團隊對測試的共識與分歧
+
+
+最重要的發現是：團隊並不反對測試，而是希望能夠以理性、有效的方式導入測試。大家都認同測試的價值，但更關心的是如何避免「為了測試而測試」的情況。
+
+
+<Glow glow="center" />
+
+<p>關鍵的分歧點在於：</p>
+<div mb-4>
+  <span class="font-bold">TDD vs TLD：</span>
+  應該先寫測試還是先開發功能？
+  <span text-hex-0e8e85 font-bold>
+    <span v-mark="1">
+      團隊內有不同偏好，期待找到最適合自身流程的平衡點。
+    </span>
+  </span>
+</div>
+<div mb-4>
+  <span class="font-bold" >Test Case 主導權：</span>
+    測試內容應由誰來決定？
+    <span text-hex-0e8e85 font-bold>
+      <span v-mark="1">
+        需明確分工與協作機制。
+      </span>
+    </span>  
+</div>
+<div mb-4>
+  <span class="font-bold">測試粒度：</span>
+    測試要做到多細？
+    <span text-hex-0e8e85 font-bold>
+      <span v-mark="1">
+        需根據專案特性與風險評估調整。 
+      </span>
+    </span>
+</div>
+
+共同的期待是：
+<ul>
+  <li><span class="font-bold">有清楚的測試規範與開發流程</span></li>
+  <li><span class="font-bold">有經驗者實際指導與帶領</span></li>
+  <li><span class="font-bold">測試能真正產生實質效益</span></li>
+  <li><span class="font-bold">測試不應成為開發負擔</span></li>
+</ul>
+
+<!-- 整理大家想法、痛點、關注點 -->
+
+---
+src: './reuse/thanks.md'
+---

@@ -2,17 +2,15 @@
 import { useNav } from '@slidev/client'
 import seedrandom from 'seedrandom'
 /**
- * A new glow effect system powered by blured polygons
+ * 一個由模糊多邊形驅動的新發光效果系統
  *
- * Credits to @pi0 @Atinux
- *
- * Properties:
- * - glow: 'left' | 'right' | 'top' | 'bottom' | 'full' -  Distribution of the polygons points
- * - glowOpacity: number - Opacity of the polygons (4)
- * - glowHue: number - Hue shift for the polygons (default: 0)
- * - glowSeed: string | false - Seed for the stable random distribution (default: 'default')
+ * 屬性：
+ * - glow: 'left' | 'right' | 'top' | 'bottom' | 'full' - 多邊形點的分布
+ * - glowOpacity: number - 多邊形的不透明度 (4)
+ * - glowHue: number - 多邊形的色相偏移 (預設: 0)
+ * - glowSeed: string | false - 穩定隨機分布的種子值 (預設: 'default')
  */
-import { computed, defineProps, ref, watch, withDefaults } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export type Range = [number, number]
 
