@@ -1,9 +1,9 @@
 ---
 # You can also start simply with 'default'
+highlighter: shiki
 theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
 css: unocss
 colorSchema: dark
 glowSeed: 4
@@ -32,21 +32,10 @@ layout: cover
 ---
 
 # 前端測試進程報告與問題研討
+<Glow />
 
 前端測試研究 & 意見調查 & 下一步評估
 
-<div @click="$slidev.nav.next" class="mt-12 py-1" hover:bg="white op-10">
-   按我下一頁<carbon:arrow-right />
-</div>
-
-<LightOrDark width="100" alt="some image">
-  <template #dark="props">
-    <img src="/dark.png" v-bind="props"/>
-  </template>
-  <template #light="props">
-    <img src="/light.png" v-bind="props"/>
-  </template>
-</LightOrDark>
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
@@ -57,6 +46,7 @@ hideInToc: true
 ---
 
 # 目錄
+<Glow glow="bottom" :glowOpacity="0.7" />
 
 <Toc text-sm minDepth="1" maxDepth="2" />
 
@@ -65,18 +55,23 @@ hideInToc: true
   Learn more: https://sli.dev/features/slide-scope-style
   -->
 
+<style>
+.slidev-toc {
+  font-size: 1.5rem;
+}
+</style>
+
 ---
 
-# 前端測試的理解 - 問卷訪談 & 個人訪談
+# 前端測試的理解 - 問卷訪談
+<Glow glow="bottom-right" />
 
-為了更了解每一位前端成員對於「前端測試」的個人見解，我們除了問卷調查外，也特別進行個別訪談，以提煉最真實的想法。
+為了更了解每一位前端成員對於「前端測試」的個人見解，我們在 5/13 展開問卷調查，蒐集團隊成員學習前端測試至今的理解。
 
 **歷程：**
 
 - 2025/05/13 ～ 2025/05/15 問卷調查
 - 2025/05/15 針對問卷調查內容與前端團隊同步討論
-- 2025/06/09 ～ 2025/06/11 針對小組成員一對一訪談
-- 2025/06/18 同步「一對一訪談」整理後結果
 
  [learn more](https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c)
 
@@ -85,7 +80,7 @@ hideInToc: true
 ---
 
 # 前端測試共識
-
+<Glow glow="center" />
 
 <div class="grid grid-cols-2 gap-x-8">
 <div>
@@ -166,11 +161,11 @@ hideInToc: true
 
 ---
 
-# 目前的執行狀況
+# 目前的執行狀況 - 會議
 
-[Read more in the docs](https://sli.dev/guide/syntax.html#notes)
+<Glow glow="top-right" />
 
-<div class="h-[90dvh] max-h-[100%] overflow-y-auto">
+<div v-click class="h-[90dvh] max-h-[100%] overflow-y-auto">
 
 | 會議內容 | 日期 |
 |---|---|
@@ -202,6 +197,11 @@ hideInToc: true
 </div>
 
 
+<a v-after target="_blank"  href="https://www.notion.so/ewill-software/All-Meeting-Data-200d6e303b5c809caea4dabcb9caab87" class="abs-tr top-12 right-15">
+  Read more in the docs
+</a>
+
+
 <style>
 .overflow-y-auto::-webkit-scrollbar {
   width: 8px;
@@ -227,4 +227,25 @@ hideInToc: true
 
 ---
 
-# 執行到至今，有哪些問題或疑問
+# 目前的執行狀況 - 讀書會
+我們認為應該培養對於前端測試的基本認知與技術熟悉度，才能有效評估前端測試導入對於團隊的價值
+
+初期我們選用 [《前端測試指南：策略與實踐》(Frontend Testing Guide: Strategies and Practices)](https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/) 作為初探前端測試的敲門磚。
+
+
+2025/2/10 - 2025/2/19 Vicky、Eric 開始自學測試相關知識，從《前端測試指南：策略與實踐》撰寫[學習文件](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c)
+
+2025/02/21 - 首次與團隊分享[前端測試的種類](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d)
+
+<Glow glow="top-right" />
+
+
+---
+
+# 執行到至今，有哪些問題或疑問 - 個人訪談
+<Glow glow="bottom-right" />
+
+第一次問卷調查後，我們發現團隊成員對於導入測試的態度不一，所以為了提煉更深入的聲音，我們進行了第二次的訪談，這次與上次不同的是以「個人訪談」的方式進行，為了讓每一個人能說出最真實的想法。
+
+- 2025/06/09 ～ 2025/06/11 針對小組成員一對一訪談
+- 2025/06/18 同步「一對一訪談」整理後結果
