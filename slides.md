@@ -211,7 +211,7 @@ layout: center
     初期我們選用 <a href="https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/" target="_blank" rel="noopener noreferrer">《前端測試指南：策略與實踐》Frontend Testing Guide: Strategies and Practices</a>
     作為初探前端測試的敲門磚。
   </p>
-  <p>期間我們選用前端主流測試 util，Vitest、Vue-util-test，理解相關 Feature 。</p>
+  <p>中後期我們選用前端主流測試 util，像是 Vitest、Vue-util-test ...等，理解相關 Feature 。</p>
   
   <div flex="~ gap-2" mt2>
     <DevToolsModule
@@ -241,23 +241,11 @@ layout: center
 <Glow glow="top-right" />
 
 <ul mt2 v-click="7" :class="$click === 7 ? 'translate-y-20': ''">
+  <p class="mb-1!">歷程</p>
   <li>
-    2025/2/10 - 2025/2/19 開始自學測試相 關知識，從
-    <a href="https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/" target="_blank" rel="noopener noreferrer">
-      《前端測試指南：策略與實踐》
-    </a>
-    撰寫學習文件
-  </li>
-  <li>
-    2025/02/21- 2025/03/06 首次與前端團隊分享
-    <a href="https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d" target="_blank" rel="noopener noreferrer">
-      測試入門
-    </a>
-  </li>
-  <li>
-    2025/03/27
-    <a href="http://192.168.50.231:81/Vicky/frontendtestingmilestone" target="_blank" rel="noopener noreferrer">
-      Gitlab <carbon:LogoGitlab /> 測試環境搭建、單元測試實作
+    2025/05/27-2025/06/19
+    <a href="https://vitest.dev/guide/features.html" target="_blank" rel="noopener noreferrer">
+      Vites Feature 理解（計 16 項）
     </a>
   </li>
   <li>
@@ -267,14 +255,29 @@ layout: center
     </a>
   </li>
   <li>
-    2025/05/27-2025/06/19
-    <a href="https://vitest.dev/guide/features.html" target="_blank" rel="noopener noreferrer">
-      Vites Feature 理解（計 16 項）
+    2025/03/27
+    <a href="http://192.168.50.231:81/Vicky/frontendtestingmilestone" target="_blank" rel="noopener noreferrer">
+      Gitlab <carbon:LogoGitlab /> 測試環境搭建、單元測試實作
     </a>
+  </li>
+  <li>
+    2025/02/21- 2025/03/06 首次與前端團隊分享
+    <a href="https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d" target="_blank" rel="noopener noreferrer">
+      測試入門
+    </a>
+  </li>
+  <li>
+    2025/2/10 - 2025/2/19 開始自學測試相 關知識，從
+    <a href="https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/" target="_blank" rel="noopener noreferrer">
+      《前端測試指南：策略與實踐》
+    </a>
+    撰寫學習文件
   </li>
 </ul>
 
-[Read more in the docs](https://www.notion.so/ewill-software/1b3d6e303b5c80ed94cfd6c1848a250b?source=copy_link#200d6e303b5c8093a67acaad5619aad6)
+<a v-click="7" target="_blank"  href="https://www.notion.so/ewill-software/1b3d6e303b5c80ed94cfd6c1848a250b?source=copy_link#200d6e303b5c8093a67acaad5619aad6" rel="noopener noreferrer">
+  Read more in the docs
+</a>
 
 <!-- 描述讀書會、學習歷程與推進進度 -->
 
