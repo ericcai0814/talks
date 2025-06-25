@@ -7,16 +7,17 @@ theme: seriph
 css: unocss
 colorSchema: dark
 remoteAssets: true
+export:
+  width: 1920
+  height: 1080
 
 # some information about your slides (markdown enabled)
 title: 前端測試調查報告
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
+  ## 前端測試調查報告
+  前端測試進程報告與問題研討
 # apply unocss classes to the current slide
-class: text-center
+class: text-center w-full h-full
 # https://sli.dev/features/drawing
 drawings:
   persist: false
@@ -31,54 +32,63 @@ layout: cover
 ---
 
 # 前端測試進程報告與問題研討
-<Glow :glowSeed="false"/>
 
-前端測試研究 & 意見調查 & 下一步評估
+<Glow glow="center" :glowOpacity="1" :glowHue="5"/>
+
+從調查到共識的前端測試推進之路
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
 -->
 
----
-layout: center
-hideInToc: true
----
-
-# 目錄
-<Glow glow="bottom" :glowOpacity="0.7" />
-
-<Toc text-sm minDepth="1" maxDepth="2" />
-
-<!--
-  You can have `style` tag in markdown to override the style for the current page.
-  Learn more: https://sli.dev/features/slide-scope-style
-  -->
-
-<style>
-.slidev-toc {
-  font-size: 1.5rem;
-}
-</style>
-
 
 ---
 
 # 我們對單元測試的初步理解
-<Glow glow="bottom-right" />
 
-為了更了解每一位前端成員對於「前端測試」的個人見解，我們在 2025/5/13 展開問卷調查，蒐集團隊成員學習前端測試至今的理解。
+<Glow glow="top-right" :glowOpacity="0.7" :glowSeed="false" />
+
+為了更了解每一位前端成員對於「前端測試」的個人見解，我們透過問卷調查的方式，蒐集團隊成員學習前端測試至今的理解。
 
 <ul>
-  <li>
-    2025/05/13 ～ 2025/05/15 問卷調查
-  </li>
-  <li>
-    2025/05/15 針對問卷調查內容與前端團隊同步討論
-  </li>
+  <li>2025/05/13 ～ 2025/05/15 問卷調查</li>
+  <li>2025/05/15 針對問卷調查內容與前端團隊同步討論</li>
 </ul>
 
+[Read more in the docs](https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c)
 
-[learn more](https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c)
+<Timeline mt2 
+  :start="'2025-05-10'"
+  :end="'2025-05-20'"
+  :dataSource="{
+    prefix: 'Data Source：',
+    href: 'https://www.notion.so/ewill-software/1f2d6e303b5c80c986cae42bd700dd3c',
+    text: '前端測試調查 & 訪談'
+  }"
+  :groups="[
+    { id: 1, content: '問卷調查階段' },
+    { id: 2, content: '團隊討論階段' }
+  ]" :items="[
+    {
+      id: 1,
+      content: '問卷調查',
+      group: 1,
+      start: '2025-05-13',
+      end: '2025-05-14',
+      type: 'range',
+      className: 'text-center rounded-lg! bg-blue:20! text-blue! border-blue:50!'
+    },
+    {
+      id: 2,
+      content: '團隊同步討論',
+      group: 2,
+      start: '2025-05-15',
+      end: '2025-05-16',
+      type: 'range',
+      className: 'px2 rounded-lg! bg-green:20! text-green! border-green:50!'
+    }
+  ]" />
+
 
 <!-- 結合問卷與概念導入 -->
 
@@ -87,7 +97,7 @@ hideInToc: true
 layout: center
 ---
 
-<Glow glow="top" />
+<Glow glow="center" />
 
 <div flex="~ col items-center justify-center w-full">
 
@@ -103,7 +113,7 @@ layout: center
     </div>
   </h2>
 
-  <div grid="~ cols-2 gap-4" mt4 w-full>
+  <div grid="~ cols-2 gap-4" translate-y-10 w-full scale-150>
     <div v-click="3" forward:delay-400 flex="~ col items-center gap-2" transition duration-500>
       <p>11 次 讀書會</p>
     </div>
@@ -158,7 +168,7 @@ layout: center
 </div>
 
 
-<a v-after target="_blank"  href="https://www.notion.so/ewill-software/All-Meeting-Data-200d6e303b5c809caea4dabcb9caab87" class="abs-tr top-12 right-15">
+<a v-after target="_blank"  href="https://www.notion.so/ewill-software/All-Meeting-Data-200d6e303b5c809caea4dabcb9caab87" rel="noopener noreferrer" class="abs-tr top-12 right-15">
   Read more in the docs
 </a>
 
@@ -181,7 +191,7 @@ layout: center
 .overflow-y-auto table th {
   position: sticky;
   top: 0;
-  background: #2c2c2c;
+  background:rgb(80, 78, 78);
   z-index: 1;
 }
 </style>
@@ -191,18 +201,80 @@ layout: center
 ---
 
 # 讀書會
+
+我們認為應該培養對於前端測試的基本認知與技術熟悉度，才能有效評估前端測試導入對於團隊的價值。
+
+<Glow glow="right-bottom" :glowSeed="false" />
+
+<div>
+  <p>
+    初期我們選用 <a href="https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/" target="_blank" rel="noopener noreferrer">《前端測試指南：策略與實踐》Frontend Testing Guide: Strategies and Practices</a>
+    作為初探前端測試的敲門磚。
+  </p>
+  <p>期間我們選用前端主流測試 util，Vitest、Vue-util-test，理解相關 Feature 。</p>
+  
+  <div flex="~ gap-2" mt2>
+    <DevToolsModule
+      v-click icon="i-logos-vitest" name="Vitest" theme="yellow"
+    />
+    <DevToolsModule
+      v-click icon="i-skill-icons-jest" name="Jest" theme="purple"
+    />
+    <DevToolsModule
+      v-click icon="i-logos-testing-library" name="testing-library" theme="teal"
+    />
+    <DevToolsModule
+      v-click icon="i-skill-icons-cypress-light" name="cypress" theme="default"
+    />
+    <DevToolsModule
+      v-click icon="i-vscode-icons-file-type-vue" name="Vue utils test" theme="green"
+    />
+    <DevToolsModule
+      v-click icon="i-logos-storybook-icon" name="Storybook" theme="pink"
+    />
+    <DevToolsModule
+      v-after icon="i-ri-more-line" name="More..." border-dashed
+    />
+  </div>
+</div>
+
 <Glow glow="top-right" />
 
-我們認為應該培養對於前端測試的基本認知與技術熟悉度，才能有效評估前端測試導入對於團隊的價值
+<ul mt2 v-click="7" :class="$click === 7 ? 'translate-y-20': ''">
+  <li>
+    2025/2/10 - 2025/2/19 開始自學測試相 關知識，從
+    <a href="https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/" target="_blank" rel="noopener noreferrer">
+      《前端測試指南：策略與實踐》
+    </a>
+    撰寫學習文件
+  </li>
+  <li>
+    2025/02/21- 2025/03/06 首次與前端團隊分享
+    <a href="https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d" target="_blank" rel="noopener noreferrer">
+      測試入門
+    </a>
+  </li>
+  <li>
+    2025/03/27
+    <a href="http://192.168.50.231:81/Vicky/frontendtestingmilestone" target="_blank" rel="noopener noreferrer">
+      Gitlab <carbon:LogoGitlab /> 測試環境搭建、單元測試實作
+    </a>
+  </li>
+  <li>
+    2025/04/18-2025/04/25
+    <a href="http://192.168.50.231:81/Vicky/frontendtestingmilestone/-/tree/DEV/src/__test__/unit?ref_type=heads" target="_blank" rel="noopener noreferrer">
+      元件測試實作（radio、select、input 等）
+    </a>
+  </li>
+  <li>
+    2025/05/27-2025/06/19
+    <a href="https://vitest.dev/guide/features.html" target="_blank" rel="noopener noreferrer">
+      Vites Feature 理解（計 16 項）
+    </a>
+  </li>
+</ul>
 
-初期我們選用 [《前端測試指南：策略與實踐》(Frontend Testing Guide: Strategies and Practices)](https://www.cythilya.tw/2024/06/06/frontend-testing-guide-strategies-and-practices/) 作為初探前端測試的敲門磚。
-
-
-2025/2/10 - 2025/2/19 開始自學測試相 關知識，從《前端測試指南：策略與實踐》撰寫[學習文件](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c)
-
-2025/02/21 - 首次與團隊分享[前端測試的種類](https://www.notion.so/ewill-software/1d8d6e303b5c80c78a94f74804cf193c?source=copy_link#1d8d6e303b5c8043bcb3f4ce6ecc672d)
-
-
+[Read more in the docs](https://www.notion.so/ewill-software/1b3d6e303b5c80ed94cfd6c1848a250b?source=copy_link#200d6e303b5c8093a67acaad5619aad6)
 
 <!-- 描述讀書會、學習歷程與推進進度 -->
 
@@ -218,70 +290,294 @@ layout: center
 - 2025/06/09 ～ 2025/06/11 針對小組成員一對一訪談
 - 2025/06/18 同步「一對一訪談」整理後結果
 
-<a target="_blank"  href="https://www.notion.so/ewill-software/All-Meeting-Data-200d6e303b5c809caea4dabcb9caab87">
+<a target="_blank"  href="https://www.notion.so/ewill-software/218d6e303b5c808384e7ffc7d9614e21" rel="noopener noreferrer">
   Read more in the docs
 </a>
 
 <div mt-10  flex="~ justify-center">
-  <span  v-mark="{ at: 2, type: 'circle', color: '#0e8e85' }">
+  <span  v-mark.delay200="{ at: 2, type: 'circle', color: '#0e8e85', roughness: 3 }">
     <div v-click="1" w-180 h-30 py-4 px-10 flex="~ items-center justify-center">
       從訪談內容可以看出，雖然團隊成員對測試的具體實施方式有不同看法，但在核心問題上已經形成了相當程度的共識。
     </div>  
   </span>
 </div>
 
-
 <!-- 結合訪談與反思，鋪陳未來方向 -->
 
 ---
+layout: cover
+---
 
-# 團隊對測試的共識與分歧
-
-
-最重要的發現是：團隊並不反對測試，而是希望能夠以理性、有效的方式導入測試。大家都認同測試的價值，但更關心的是如何避免「為了測試而測試」的情況。
-
+<h1 flex="~ col">
+  <div text-2xl origin-top transition duration-500 :class="$clicks <= 1 ? 'scale-150' : 'op50'">
+    <span>團隊對測試的 </span>
+    <span v-click>阻礙點 </span>
+  </div>
+  <div mt1 forward:delay-300 v-click font-size-5>
+    大家都認同測試的價值，但更關心如何避免「為了測試而測試」的情況，
+  </div>
+</h1>
 
 <Glow glow="center" />
 
-<p>關鍵的分歧點在於：</p>
-<div mb-4>
-  <span class="font-bold">TDD vs TLD：</span>
-  應該先寫測試還是先開發功能？
-  <span text-hex-0e8e85 font-bold>
-    <span v-mark="1">
-      團隊內有不同偏好，期待找到最適合自身流程的平衡點。
-    </span>
-  </span>
-</div>
-<div mb-4>
-  <span class="font-bold" >Test Case 主導權：</span>
-    測試內容應由誰來決定？
-    <span text-hex-0e8e85 font-bold>
-      <span v-mark="1">
-        需明確分工與協作機制。
-      </span>
-    </span>  
-</div>
-<div mb-4>
-  <span class="font-bold">測試粒度：</span>
-    測試要做到多細？
-    <span text-hex-0e8e85 font-bold>
-      <span v-mark="1">
-        需根據專案特性與風險評估調整。 
-      </span>
-    </span>
-</div>
+---
+layout: center
+---
 
-共同的期待是：
+# 分歧
+
+<Glow glow="center" />
+
+<p>關鍵的阻礙點在於：</p>
+
 <ul>
-  <li><span class="font-bold">有清楚的測試規範與開發流程</span></li>
-  <li><span class="font-bold">有經驗者實際指導與帶領</span></li>
-  <li><span class="font-bold">測試能真正產生實質效益</span></li>
-  <li><span class="font-bold">測試不應成為開發負擔</span></li>
+  <li mb-4 v-click="1">
+    <span class="font-bold">TDD vs TLD：</span>
+    應該先寫測試還是先開發功能？
+    <span text-hex-0e8e85 font-bold>
+      <span v-mark.underline.delay300="1">
+        團隊內有不同偏好，期待找到最適合自身流程的平衡點。
+      </span>
+    </span>
+  </li>
+  <li mb-4 v-click="2">
+    <span class="font-bold" >測試相關規格決策責任歸屬：</span>
+      測試規格、內容應由誰來決定？
+      <span text-hex-0e8e85 font-bold>
+        <span v-mark.underline.delay300="2">
+          團隊內分為兩派，需明確分工與協作機制。
+        </span>
+      </span>  
+  </li>
+  <li mb-4 v-click="3">
+    <span class="font-bold">測試粒度：</span>
+      測試要做到多細？
+      <span text-hex-0e8e85 font-bold>
+        <span v-mark.underline.delay300="3">
+          需根據專案特性與風險評估調整。 
+        </span>
+      </span>
+  </li>
+  <li mb-4 v-click="4">
+    <span class="font-bold">專案流程：</span>
+      各階段要做哪些事？
+      <span text-hex-0e8e85 font-bold>
+        <span v-mark.underline.delay300="4">
+          團隊需訂定各階段測試工項、責任歸屬
+        </span>
+      </span>
+  </li>
 </ul>
 
-<!-- 整理大家想法、痛點、關注點 -->
+<!-- 
+  [click]
+  測試撰寫時機：TDD vs TLD：
+  團隊對於應該先寫測試還是先開發功能存在根本性分歧
+    支持 TDD（測試驅動開發）- Lily 建議採用 TDD 流程，先寫測試再寫程式碼，幫助開發者更早釐清需求與功能邏輯。
+    支持 TLD（開發後測試）- Kevin、Aaron、Chris、Vicky 傾向於系統開發完成後再撰寫測試，認為開發前很難預測實作方式，提前寫測試反而浪費時間。
+
+
+  [click]
+  測試相關規格決策責任歸屬： 
+    開發主導派 - Kevin、Aaron 認為開發者最了解實作邏輯與潛在風險點，應由 PG 自行決定 test case。
+    協作決策派 - Vicky、Chris、Lily 認為應由 SD/QA/PM 先定義測試規格，再由 PG 依據實作補充細節。
+
+  [click]
+  測試粒度：
+    團隊對於測試要做到多細存在不同看法
+    高覆蓋率派 - 認為應該追求高測試覆蓋率，確保每個功能都有對應測試
+    關鍵路徑派 - 認為應該專注在關鍵業務邏輯和風險點，避免過度測試
+    需根據專案特性、風險評估和時間成本來決定合適的測試粒度
+
+  [click]
+  專案流程：
+    團隊對於各階段測試工項缺乏共識
+    需求階段 - 是否要定義測試規格？由誰主導？
+    分析階段 - 如何識別關鍵流程和測試重點？
+    設計階段 - 測試總類、規格選擇的決策權責
+    開發階段 - 測試與開發的時程安排和責任分工
+    需要明確訂定各階段的測試工項、責任歸屬和交付標準
+-->
+
+---
+
+<Glow glow="center" />
+
+# 個人訪談
+
+<a v-after target="_blank" href="https://www.notion.so/ewill-software/218d6e303b5c808384e7ffc7d9614e21?source=copy_link#218d6e303b5c807dbac3ebc547434506" rel="noopener noreferrer" class="abs-tr top-12 right-15">
+  Read more in the docs
+</a>
+
+<div grid="~ cols-1 gap-6" pt3>
+  <!-- 心態層面 -->
+  <div
+    v-click="1"
+    :class="[
+      'transition-all duration-700',
+      $clicks >= 4 ? 'opacity-0 -translate-y-20 pointer-events-none' : 'opacity-100 translate-y-0'
+    ]"
+    bg-lime:10 border="~ lime/50 rounded-lg"
+  >
+    <div flex="~ items-center gap-2" bg-lime:10 px4 py2 rounded><div i-tabler-heart text-xl invert-50/> 心態層面</div>
+    <div ml2 p2 text-lime op80>
+      <v-clicks>
+        <ul>
+          <li>
+            測試價值不明，無法衡量效益
+            <ul>
+              <li>測試是否真的「值得做」缺乏量化指標（如重工降低、交接成本降低）【Vicky】</li>
+              <li>測試通過 ≠ 邏輯正確，容易誤導開發者【Kevin】</li>
+              <li>無法體驗實際效益 ⇒ 難以建立信任感【Aaron】</li>
+            </ul>
+          </li>
+          <li>
+            害怕浪費時間與錯誤實作
+            <ul>
+              <li>測試寫錯邏輯等於「白做工」或「多做工」【Kevin】</li>
+              <li>寫太早會因實作改變導致重工【Kevin、Aaron】</li>
+              <li>沒有經驗時，不知從何下手、怕踩坑【Vicky、Lily】</li>
+            </ul>
+          </li>
+          <li>
+            擔心壓縮開發時間
+            <ul>
+              <li>寫測試導致來不及開發【Vicky、Chris】</li>
+            </ul>
+          </li>
+        </ul>
+      </v-clicks>
+    </div>
+  </div>
+
+  <!-- 流程與制度 -->
+  <div
+    v-click="7"
+    :class="[
+      'transition-all duration-700',
+      $clicks >= 7 ? 'opacity-0 -translate-y-120 pointer-events-none' : ($clicks >= 4 ? 'opacity-100 -translate-y-100' : 'opacity-0 translate-y-40 pointer-events-none')
+    ]"
+    bg-gray:10 border="~ gray/50 rounded-lg"
+  >
+    <div flex="~ items-center gap-2" bg-gray:10 px4 py2 rounded><div i-mdi-format-list-bulleted text-xl invert-50 /> 流程與制度</div>
+    <div ml2 p2 text-gray1>
+      <v-clicks>
+        <ul>
+          <li>
+            測試時機點不清、規範未明確
+            <ul>
+              <li>測試要什麼時候寫？前寫後寫各有擔憂【多位】</li>
+              <li>測試命名、結構、內容無一致規範【Lily、Kevin】</li>
+              <li>測試與開發進度衝突，無額外排測試時間【Chris】</li>
+            </ul>
+          </li>
+          <li>
+            關鍵流程、test case 責任歸屬不清
+            <ul>
+              <li>誰來定義「關鍵流程」沒有共識（PM？SD？SA？）【全員提及】</li>
+              <li>test case 撰寫權責不明（是 QA、SD 還是 PG 主導？）【分歧明顯】</li>
+              <li>沒有經驗時，不知從何下手、怕踩坑【Vicky、Lily】</li>
+            </ul>
+          </li>
+          <li>
+            專案流程職責不明確
+            在軟體開發的四個主要階段「需求訪談 → 系統分析 → 系統設計 → 系統開發」中，團隊成員對於各階段應執行的測試相關工作缺乏共識
+          </li>
+        </ul>
+      </v-clicks>
+    </div>
+  </div>
+
+  <!-- 角色協作與溝通 -->
+  <div
+    v-click="8"
+    :class="[
+      'transition-all duration-700',
+      $clicks >= 8 ? 'opacity-0 -translate-y-220 pointer-events-none' : ($clicks >= 7 ? 'opacity-100 -translate-y-200' : 'opacity-0 translate-y-20 pointer-events-none')
+    ]"
+    bg-orange:10 border="~ orange/50 rounded-lg"
+  >
+    <div flex="~ items-center gap-2" bg-orange:10 px4 py2 rounded><div i-mdi-account-group-outline invert-50 hue-rotate-180 text-xl /> 角色協作與溝通</div>
+    <div ml2 p2 text-orange1>
+      <v-clicks>
+        <ul>
+          <li>
+            QA、前端角色邊界模糊
+            <ul>
+              <li>PG、SD、QA 在測試驗收與設計上的分工未統一【多位提到】</li>
+            </ul>
+          </li>
+        </ul>
+      </v-clicks>
+    </div>
+  </div>
+
+  <!-- 技術與經驗 -->
+  <div
+    v-click="9"
+    :class="[
+      'transition-all duration-700',
+      $clicks >= 9 ? 'opacity-0 -translate-y-250 pointer-events-none' : ($clicks >= 8 ? 'opacity-100 -translate-y-235' : 'opacity-0 translate-y-20 pointer-events-none')
+    ]"
+    bg-pink:10 border="~ pink/50 rounded-lg"
+  >
+    <div flex="~ items-center gap-2" bg-pink:10 px4 py2 rounded><div i-mdi-brain invert-50 text-xl /> 技術與經驗</div>
+    <div ml2 p2 text-pink2>
+      <v-clicks>
+        <ul>
+          <li>
+            缺乏有經驗者帶領
+            <ul>
+              <li>初學者很難從文件理解實作重點，需要 mentor 或顧問協助【Vicky、Chris】</li>
+            </ul>
+          </li>
+        </ul>
+      </v-clicks>
+    </div>
+  </div>
+
+  <!-- 專案實務限制 -->
+  <div
+    :class="[
+      'transition-all duration-700',
+      $clicks >= 11 ? 'opacity-0 -translate-y-300 pointer-events-none' : ($clicks >= 9 ? 'opacity-100 -translate-y-275' : 'opacity-0 translate-y-20 pointer-events-none')
+    ]"
+    bg-yellow:10 border="~ yellow/50 rounded-lg"
+  >
+    <div flex="~ items-center gap-2" bg-yellow:5 px4 py2 rounded><div i-mdi-alert-outline invert-50 text-xl /> 專案實務限制</div>
+    <div ml2 p2 text-yellow2>
+      <v-clicks>
+        <ul>
+          <li>
+            專案開發與測試時間難以分離
+            <ul>
+              <li>擔心測試被壓縮進開發時程內，未被額外估時【Chris】</li>
+              <li>多數需求在分析階段不夠清楚，導致測試無法前置【Aaron、Kevin】</li>
+            </ul>
+          </li>
+          <li>
+            技術環境尚未完善
+            <ul>
+              <li>CI 未建置，自動驗證難以落實，測試結果無法自動回饋，仰賴人工確認【Kevin】</li>
+            </ul>
+          </li>
+        </ul>
+      </v-clicks>
+    </div>
+  </div>
+</div>
+
+
+<p>關鍵的共識點在於：</p>
+
+<ul>
+  <li v-click="1"><span class="font-bold">有清楚的測試規範與開發流程</span></li>
+  <li v-click="2"><span class="font-bold">有經驗者實際指導與帶領</span></li>
+  <li v-click="3"><span class="font-bold">測試能真正產生實質效益</span></li>
+  <li v-click="4"><span class="font-bold">測試不應成為開發負擔</span></li>
+</ul>
 
 ---
 src: './reuse/thanks.md'
 ---
+
