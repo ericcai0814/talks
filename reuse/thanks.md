@@ -1,9 +1,8 @@
 ---
 layout: center
-class: 'text-center pb-5'
 ---
 
-# Thank You!
+# Thank You! {.important-text-5xl}
 
 <Glow glow="center" :glowSeed="false" />
 ---
