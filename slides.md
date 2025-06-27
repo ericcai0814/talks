@@ -46,7 +46,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 # 我們對單元測試的初步理解
 
-<Glow glow="top-right" :glowOpacity="0.7" :glowSeed="false" />
+<Glow glow="right" :glowOpacity="0.2" :glowSeed="false" />
 
 為了更了解每一位前端成員對於「前端測試」的個人見解，我們透過問卷調查的方式，蒐集團隊成員學習前端測試至今的理解。
 
@@ -90,8 +90,101 @@ The last comment block of each slide will be treated as slide notes. It will be 
   ]" />
 
 
-<!-- 結合問卷與概念導入 -->
+<!-- 
+  [click] 為了能夠提煉每位成員最真實的想法，我們透過問卷的方式來進行調查。在歷經讀書會的初步學習後，我們希望進一步了解──大家在目前的專案經驗與知識背景下，對於「前端測試」這件事，有什麼樣的理解與看法。
+  
+  然後他們對測試的期待是什麼？他們擔心什麼？哪些地方是認同的？哪些又是存疑的？ 
+-->
 
+---
+layout: center
+class: text-center
+---
+
+<Glow glow="center" :glowOpacity="0.3" :glowSeed="false" />
+
+<h1 important-text-5xl v-click>測試的價值與代價</h1>
+
+<div v-click text-white:50 text-2xl line-height-relaxed>
+前端測試能幫助團隊<span text-lime4 v-mark.lime.underline.delay300="2"> 提升程式碼品質</span>， 也能在<span text-yellow4 v-mark.yellow.underline.delay700="2">多人協作 </span>或<span text-yellow4 v-mark.yellow.underline.delay900="2"> 頻繁改動</span> 時提升穩定性與信心。
+</div>
+
+<div v-click text-white:50 text-2xl mt4 line-height-relaxed>
+但測試<span text-red4 v-mark.red.underline.delay500="3"> 需要額外的溝通時間、開發時間、學習與維護成本</span>，導入時需根據<span text-white font-bold> 功能風險</span>、<span text-white font-bold>專案規模</span> 與<span text-white font-bold> 時程壓力</span> 審慎評估。
+</div>
+
+<!--
+
+[click]
+在訪談與問卷中，大家其實都提到了「測試的好處」，但同時也點出了實際會遇到的挑戰
+在問卷調查後，前端們對於 "測試" 有了初步的理解，大方向來說已經可以提煉導入的價值與代價
+
+[click]
+前端測試能在多人協作與需求頻繁變動的情境下，  
+有效守住關鍵邏輯，避免改 A 壞 B，  
+提升系統穩定性與團隊信心。
+
+舉例來說，當我們的表單元件被不同頁面共用時，只要改了一個欄位的邏輯，就可能影響多個流程；這時測試就能幫我們第一時間發現問題。
+
+[click]
+但測試撰寫與維護需投入額外時間與技術成本，  
+若專案規模小、邏輯單純或時程緊迫，  
+導入效益未必能即時體現，需依功能風險審慎評估。
+-->
+
+---
+
+# 測試如何守護產品品質
+
+<Glow glow="top-right" :glowOpacity="0.7" :glowSeed="false" />
+
+<div class="grid grid-cols-2 gap-4">
+
+```js [unit-test-example.js] {*|3|10-12|11}{at:1} twoslash
+// the implementation
+export function add(...args) {
+  return args.reduce((a, b) => a + b, 0)
+}
+
+// in-source test suites
+if (import.meta.vitest) {
+  const { it, expect } = import.meta.vitest
+  it('add', () => {
+    expect(add()).toBe(0)
+    expect(add(1)).toBe(1)
+    expect(add(1, 2, 3)).toBe(6)
+  })
+}
+```
+
+```diff
+- Expected
++ Received
+
+- 1
++ -1
+
+src/utils/test/addWithInSourceTest.js:11:20
+      9|   it('add', () => {
+     10|     expect(add()).toBe(0)
+     11|     expect(add(1)).toBe(1)
+       |                    ^
+     12|     expect(add(1, 2, 3)).toBe(6)
+     13|   })
+```
+
+</div>
+
+<!-- 講稿：
+這裡我們先展示一個簡單的加法（add）和減法（sub）函數，並且直接在原始碼裡寫下對應的測試。這種 in-source test 的寫法，可以讓我們在開發時就同步驗證功能正確性。測試會檢查 add 和 sub 是否能正確計算結果。
+-->
+<!-- 講稿：
+接下來，我們模擬一個常見的開發情境：當我們修正或調整某個功能（例如 add），有時候會不小心影響到其他功能（例如 sub）。這裡用 diff block 展示，sub 原本是做減法，卻被誤改成加法。這種「改 A 壞 B」的狀況，在缺乏完整測試時很容易發生。
+-->
+
+<!-- 講稿：
+最後，我們來看測試結果。可以看到 add 的測試全部通過，但 sub 的測試失敗了，因為我們誤把減法改成加法。這正好說明了測試的價值：它能幫助我們及早發現「回歸錯誤」，避免一個小改動影響到其他功能。這也是為什麼團隊需要建立自動化測試的共識。
+-->
 
 ---
 layout: center
@@ -134,7 +227,7 @@ layout: center
 
 # 前端測試導入行動紀錄總覽
 
-<Glow glow="top-right" />
+<Glow glow="top-right" :glowOpacity="0.7"/>
 
 <div class="h-[90dvh] max-h-[100%] overflow-y-auto">
 
@@ -286,7 +379,8 @@ layout: center
 ---
 
 # 我們遇到了哪些問題？
-<Glow glow="bottom-right" />
+
+<Glow glow="bottom-right" :glowOpacity="0.6" :glowSeed="false"/>
 
 第一次問卷調查後，我們發現團隊成員對於導入測試的態度不一，所以為了提煉更深入的聲音，我們進行了第二次的訪談，這次與上次不同的是以「個人訪談」的方式進行，為了讓每一個人能說出最真實的想法。
 
@@ -321,7 +415,7 @@ layout: cover
   </div>
 </h1>
 
-<Glow glow="center" />
+<Glow glow="center" :glowOpacity="0.7" :glowSeed="false" />
 
 ---
 layout: center
@@ -404,9 +498,10 @@ layout: center
 
 ---
 
-<Glow glow="center" />
 
 # 個人訪談
+
+<Glow glow="top-right" :glowOpacity="0.2" :glowHue="5"/>
 
 <a v-after target="_blank" href="https://www.notion.so/ewill-software/218d6e303b5c808384e7ffc7d9614e21?source=copy_link#218d6e303b5c807dbac3ebc547434506" rel="noopener noreferrer" class="abs-tr top-12 right-15">
   Read more in the docs
@@ -569,16 +664,6 @@ layout: center
     </div>
   </div>
 </div>
-
-
-<p>關鍵的共識點在於：</p>
-
-<ul>
-  <li v-click="1"><span class="font-bold">有清楚的測試規範與開發流程</span></li>
-  <li v-click="2"><span class="font-bold">有經驗者實際指導與帶領</span></li>
-  <li v-click="3"><span class="font-bold">測試能真正產生實質效益</span></li>
-  <li v-click="4"><span class="font-bold">測試不應成為開發負擔</span></li>
-</ul>
 
 ---
 src: './reuse/thanks.md'
