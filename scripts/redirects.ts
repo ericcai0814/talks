@@ -1,87 +1,89 @@
-#!/usr/bin/env esno
+import fs from 'node:fs/promises'
+import { dirname, resolve } from 'node:path'
+import process from 'node:process'
+import fg from 'fast-glob'
 
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
-import { join, resolve } from 'node:path'
+const packageFiles = (await fg('*/src/package.json', {
+  onlyFiles: true,
+})).sort()
 
-// Generate Netlify redirects based on talk directories
-function generateRedirects() {
-  const talks = readdirSync('.')
-    .filter(dir => /^\d{4}-\d{2}-\d{2}$/.test(dir))
-    .sort()
-
-  const redirects: string[] = []
-
-  for (const talk of talks) {
-    const srcPath = join(talk, 'src')
-    const packageJsonPath = join(srcPath, 'package.json')
-    
-    try {
-      const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'))
-      const buildScript = packageJson.scripts?.build
-      
-      if (buildScript) {
-        // Extract base path from build script
-        const baseMatch = buildScript.match(/--base\s+([^\s]+)/)
-        if (baseMatch) {
-          const basePath = baseMatch[1]
-          const year = talk.split('-')[0]
-          
-          // Add redirects for common patterns
-          redirects.push(`/${year}/${talk} ${basePath} 302`)
-          redirects.push(`/${talk} ${basePath} 302`)
-          
-          // PDF redirect
-          const pdfFiles = readdirSync('.').filter(f => f.startsWith(talk) && f.endsWith('.pdf'))
-          if (pdfFiles.length > 0) {
-            redirects.push(`${basePath}/pdf /${pdfFiles[0]} 302`)
-          }
-        }
-      }
-    } catch (error) {
-      console.warn(`Could not process ${talk}: ${error}`)
+const bases = (await Promise.all(
+  packageFiles.map(async (file) => {
+    const talkRoot = dirname(dirname(file))
+    const json = JSON.parse(await fs.readFile(file, 'utf-8'))
+    const pdfFile = (await fg('*.pdf', {
+      cwd: resolve(process.cwd(), talkRoot),
+      onlyFiles: true,
+    }))[0]
+    const command = json.scripts?.build
+    if (!command)
+      return
+    const base = command.match(/ --base (.*?)\s/)?.[1]
+    if (!base)
+      return
+    return {
+      dir: talkRoot,
+      base,
+      pdfFile,
     }
-  }
+  }),
+))
+  .filter((item): item is NonNullable<typeof item> => Boolean(item))
 
-  return redirects
-}
+const redirects = bases
+  .flatMap(({ base, pdfFile, dir }) => {
+    console.log(base, pdfFile, dir)
+    const parts: string[] = []
 
-function updateNetlifyToml() {
-  const redirects = generateRedirects()
-  
-  if (redirects.length === 0) {
-    console.log('No redirects generated')
-    return
-  }
+    if (pdfFile) {
+      parts.push(`
+        [[redirects]]
+        from = "${base}pdf"
+        to = "https://github.com/ericcai0814/talks/blob/main/${dir}/${pdfFile}?raw=true"
+        status = 302
 
-  const netlifyTomlPath = 'netlify.toml'
-  let content = ''
-  
-  try {
-    content = readFileSync(netlifyTomlPath, 'utf-8')
-  } catch (error) {
-    // File doesn't exist, create basic structure
-    content = `[build]
-publish = "dist"
+        [[redirects]]
+        from = "/${dir}/pdf"
+        to = "https://github.com/ericcai0814/talks/blob/main/${dir}/${pdfFile}?raw=true"
+        status = 302`)
+    }
 
-`
-  }
+    parts.push(`
+      [[redirects]]
+      from = "${base}src"
+      to = "https://github.com/ericcai0814/talks/tree/main/${dir}"
+      status = 302`)
 
-  // Remove existing redirects section
-  content = content.replace(/\[\[redirects\]\]\n([^[]*\n?)*/g, '')
+    parts.push(`
+      [[redirects]]
+      from = "${dir}"
+      to = "https://talks.ericcai0814.me${base}"
+      status = 301
 
-  // Add new redirects
-  const redirectsSection = redirects.map(redirect => `[[redirects]]
-from = "${redirect.split(' ')[0]}"
-to = "${redirect.split(' ')[1]}"
-status = ${redirect.split(' ')[2]}
-`).join('\n')
+      [[redirects]]
+      from = "${base}*"
+      to = "${base}index.html"
+      status = 200`)
 
-  content += '\n' + redirectsSection
+    return parts
+  })
+  .join('\n')
 
-  writeFileSync(netlifyTomlPath, content)
-  console.log(`Updated ${netlifyTomlPath} with ${redirects.length} redirects`)
-}
+const content = `
+        [build]
+        publish = "dist"
+        command = "pnpm run build"
 
-if (import.meta.url === `file://${process.argv[1]}`) {
-  updateNetlifyToml()
-}
+        [build.environment]
+        NODE_VERSION = "22"
+        PLAYWRIGHT_BROWSERS_PATH = "0"
+
+        ${redirects}
+
+        [[redirects]]
+        from = "/"
+        to = "https://eric-talks.netlify.app"
+        status = 302
+      `
+
+await fs.writeFile('netlify.toml', content, 'utf-8')
