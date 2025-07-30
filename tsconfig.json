@@ -1,27 +1,13 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ES6"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": true,
     "noEmit": true,
-    "jsx": "preserve"
+    "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.vue"
-  ],
   "exclude": [
-    "node_modules",
-    "dist"
+    "**/*.md"
   ]
 }

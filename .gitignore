@@ -7,3 +7,6 @@ dist
 components.d.ts
 CLAUDE.md
 .claude
+*.log
+*-export*
+**/public/assets/fonts

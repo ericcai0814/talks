@@ -5,6 +5,9 @@ export default defineConfig({
     include: [
       'seedrandom',
       'vis-timeline',
+      'chroma-js',
+      'vis-network',
+      'vis-data',
     ],
   },
 })

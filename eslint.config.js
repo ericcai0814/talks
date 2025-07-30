@@ -6,9 +6,22 @@ export default antfu({
   pnpm: true,
   formatters: {
     css: true,
+    // markdown: true,
+    // slidev: {
+    //   files: [
+    //     '*/src/slides.md',
+    //   ],
+    // },
   },
+
   ignores: [
     '**/dist/**',
     '**/node_modules/**',
+    '**/demo/eslint/**',
   ],
 })
+  .override('antfu/markdown/disables', {
+    rules: {
+      'import/newline-after-import': 'off',
+    },
+  })
