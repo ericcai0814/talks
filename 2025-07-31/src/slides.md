@@ -76,17 +76,17 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 <div class="grid grid-cols-1 gap-4">
 <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4 flex items-center">
-<div class="text-slate-300 text-2xl mr-4">📋</div>
+<div class="i-mdi-clipboard-text text-slate-300 text-2xl mr-4"></div>
 <span class="text-slate-200">統一的 UI 元件規範與實作標準</span>
 </div>
 
 <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4 flex items-center">
-<div class="text-gray-300 text-2xl mr-4">🤝</div>
+<div class="i-mdi-handshake text-gray-300 text-2xl mr-4"></div>
 <span class="text-gray-200">提升跨部門協作效率</span>
 </div>
 
 <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4 flex items-center">
-<div class="text-zinc-300 text-2xl mr-4">🔧</div>
+<div class="i-mdi-wrench text-zinc-300 text-2xl mr-4"></div>
 <span class="text-zinc-200">建立可重用且彈性的前端模組架構</span>
 </div>
 </div>
@@ -135,21 +135,21 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div class="flex justify-between items-center">
   <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4 text-center w-30">
-    <div class="text-slate-300 text-2xl mb-2">1️⃣</div>
+    <div class="i-mdi-numeric-1-circle text-slate-300 text-2xl mb-2 mx-auto"></div>
     <p class="text-sm text-slate-300">前端針對 Vuetify 組件進行初步定義與源碼研究</p>
   </div>
   
-  <div class="text-gray-400 text-2xl">→</div>
+  <div class="i-mdi-arrow-right text-gray-400 text-2xl"></div>
   
   <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4 text-center w-30">
-    <div class="text-gray-300 text-2xl mb-2">2️⃣</div>
+    <div class="i-mdi-numeric-2-circle text-gray-300 text-2xl mb-2 mx-auto"></div>
     <p class="text-sm text-gray-300">撰寫樣式規格文件，供 UIUX 定義 guideline</p>
   </div>
   
-  <div class="text-gray-400 text-2xl">→</div>
+  <div class="i-mdi-arrow-right text-gray-400 text-2xl"></div>
   
   <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4 text-center w-30">
-    <div class="text-zinc-300 text-2xl mb-2">3️⃣</div>
+    <div class="i-mdi-numeric-3-circle text-zinc-300 text-2xl mb-2 mx-auto"></div>
     <p class="text-sm text-zinc-300">依據 guideline 討論結果，定義最終版前端模組</p>
   </div>
 </div>
@@ -164,7 +164,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 <div class="grid grid-cols-2 gap-8 mt-6">
   <div v-click>
-    <h3 class="text-xl font-bold mb-4 text-slate-200">🔧 未定義元件</h3>
+    <h3 class="text-xl font-bold mb-4 text-slate-200 flex items-center"><div class="i-mdi-wrench mr-2"></div>未定義元件</h3>
     <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4">
       <ul class="text-sm space-y-2 text-slate-300">
         <li><strong>Snackbars</strong></li>
@@ -180,7 +180,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   </div>
   
   <div v-click>
-    <h3 class="text-xl font-bold mb-4 text-gray-200">📱 頁面模組行為定義</h3>
+    <h3 class="text-xl font-bold mb-4 text-gray-200 flex items-center"><div class="i-mdi-cellphone mr-2"></div>頁面模組行為定義</h3>
     <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4">
       <p class="text-sm text-gray-300 mb-3"><strong>當前侷限</strong>：第一階段僅定義 UI 元件行為，缺乏頁面層級的模組規範</p>
       <p class="text-sm text-gray-300 font-bold mb-2">規劃重點：</p>
@@ -201,17 +201,17 @@ The last comment block of each slide will be treated as slide notes. It will be 
 <div v-click class="mt-8">
 <div class="grid grid-cols-3 gap-6">
   <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4 text-center">
-    <h4 class="text-slate-200 font-bold mb-2">👥 新增角色</h4>
+    <h4 class="text-slate-200 font-bold mb-2 flex items-center justify-center"><div class="i-mdi-account-group mr-2"></div>新增角色</h4>
     <p class="text-sm text-slate-300">SA（系統分析師）參與頁面行為定義</p>
   </div>
   
   <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4 text-center">
-    <h4 class="text-gray-200 font-bold mb-2">🔗 技術整合</h4>
+    <h4 class="text-gray-200 font-bold mb-2 flex items-center justify-center"><div class="i-mdi-link mr-2"></div>技術整合</h4>
     <p class="text-sm text-gray-300">前後端共同制定資料流傳遞標準</p>
   </div>
   
   <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4 text-center">
-    <h4 class="text-zinc-200 font-bold mb-2">⏰ 時程規劃</h4>
+    <h4 class="text-zinc-200 font-bold mb-2 flex items-center justify-center"><div class="i-mdi-clock mr-2"></div>時程規劃</h4>
     <p class="text-sm text-zinc-300">第一階段完成後即可投入專案使用，第二階段完成後達到「開箱即用」標準</p>
   </div>
 </div>
@@ -228,7 +228,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 <div class="grid grid-cols-2 gap-6 mt-6">
   <div v-click class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-6">
     <h3 class="text-slate-200 font-bold text-lg mb-4 flex items-center">
-      <div class="text-2xl mr-3">⚠️</div>
+      <div class="i-mdi-alert text-2xl mr-3"></div>
       量化指標缺失
     </h3>
     <p class="text-slate-300 text-sm">尚未建立效益衡量機制（開發時間、錯誤率、一致性等）</p>
@@ -236,7 +236,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div v-click class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-6">
     <h3 class="text-gray-200 font-bold text-lg mb-4 flex items-center">
-      <div class="text-2xl mr-3">🧪</div>
+      <div class="i-mdi-test-tube text-2xl mr-3"></div>
       實戰驗證不足
     </h3>
     <p class="text-gray-300 text-sm">guideline 尚未在實際專案中大規模應用</p>
@@ -249,7 +249,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 <div class="grid grid-cols-3 gap-6">
   <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4">
     <h4 class="text-slate-200 font-bold mb-3 flex items-center text-sm">
-      <span class="text-lg mr-2">📊</span>
+      <div class="i-mdi-chart-bar text-lg mr-2"></div>
       建立基準指標
     </h4>
     <p class="text-slate-300 text-xs">制定開發效率、代碼品質的量化追蹤機制</p>
@@ -257,7 +257,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4">
     <h4 class="text-gray-200 font-bold mb-3 flex items-center text-sm">
-      <span class="text-lg mr-2">🎯</span>
+      <div class="i-mdi-target text-lg mr-2"></div>
       分階段導入
     </h4>
     <p class="text-gray-300 text-xs">優先在小型專案試行，累積經驗後全面推廣</p>
@@ -265,7 +265,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4">
     <h4 class="text-zinc-200 font-bold mb-3 flex items-center text-sm">
-      <span class="text-lg mr-2">🔄</span>
+      <div class="i-mdi-refresh text-lg mr-2"></div>
       持續優化機制
     </h4>
     <p class="text-zinc-300 text-xs">建立回饋循環，根據實際使用情況調整 guideline</p>
@@ -282,19 +282,19 @@ The last comment block of each slide will be treated as slide notes. It will be 
 
 <div v-click class="grid grid-cols-3 gap-6 mt-6">
   <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4 text-center">
-    <div class="text-slate-300 text-3xl mb-2">✅</div>
+    <div class="i-mdi-check-circle text-slate-300 text-3xl mb-2 mx-auto"></div>
     <h4 class="text-slate-200 font-bold mb-2">標準作業流程</h4>
     <p class="text-slate-300 text-sm">成功建立 Vuetify 整合的標準作業流程</p>
   </div>
   
   <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4 text-center">
-    <div class="text-gray-300 text-3xl mb-2">🔧</div>
+    <div class="i-mdi-wrench text-gray-300 text-3xl mb-2 mx-auto"></div>
     <h4 class="text-gray-200 font-bold mb-2">技術債務解決</h4>
     <p class="text-gray-300 text-sm">解決初期技術債務累積問题</p>
   </div>
   
   <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4 text-center">
-    <div class="text-zinc-300 text-3xl mb-2">🤝</div>
+    <div class="i-mdi-handshake text-zinc-300 text-3xl mb-2 mx-auto"></div>
     <h4 class="text-zinc-200 font-bold mb-2">協作效率提升</h4>
     <p class="text-zinc-300 text-sm">提升跨部門協作效率</p>
   </div>
@@ -310,7 +310,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   <div class="space-y-4">
   <div class="bg-slate-100/10 border border-slate-300/20 rounded-lg p-4">
     <h4 class="text-slate-200 font-bold mb-2 flex items-center">
-      <span class="text-xl mr-2">📍</span>
+      <div class="i-mdi-map-marker text-xl mr-2"></div>
       第一階段完成
     </h4>
     <p class="text-slate-300 text-sm">UI 元件標準化，建立設計與開發協作基礎</p>
@@ -318,7 +318,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div class="bg-gray-100/10 border border-gray-300/20 rounded-lg p-4">
     <h4 class="text-gray-200 font-bold mb-2 flex items-center">
-      <span class="text-xl mr-2">🎯</span>
+      <div class="i-mdi-target text-xl mr-2"></div>
       第二階段完成
     </h4>
     <p class="text-gray-300 text-sm">頁面行為規範化，實現開箱即用的模組體系</p>
@@ -326,7 +326,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
   
   <div class="bg-zinc-100/10 border border-zinc-300/20 rounded-lg p-4">
     <h4 class="text-zinc-200 font-bold mb-2 flex items-center">
-      <span class="text-xl mr-2">🔄</span>
+      <div class="i-mdi-autorenew text-xl mr-2"></div>
       持續優化
     </h4>
     <p class="text-zinc-300 text-sm">建立完整的 Vuetify 整合標準，包含完整元件庫、標準化流程、維護機制，讓新功能開發能快速套用現有模組，減少重複造輪子</p>
