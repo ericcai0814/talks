@@ -1,54 +1,37 @@
-#!/usr/bin/env esno
+import fs from 'node:fs/promises'
+import process from 'node:process'
+import { fileURLToPath } from 'node:url'
+import { execa } from 'execa'
+import prompts from 'prompts'
 
-import { readdirSync, statSync } from 'node:fs'
-import { resolve } from 'node:path'
-import { execSync } from 'node:child_process'
+async function startPicker(args: string[]) {
+  const folders = (await fs.readdir(new URL('..', import.meta.url), { withFileTypes: true }))
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+    .filter(folder => folder.match(/^\d{4}-/))
+    .sort((a, b) => -a.localeCompare(b))
 
-const args = process.argv.slice(2)
-const command = args[0] || 'dev'
-const flags = args.slice(1)
+  const result = args.includes('-y')
+    ? { folder: folders[0] }
+    : await prompts([
+        {
+          type: 'select',
+          name: 'folder',
+          message: 'Pick a folder',
+          choices: folders.map(folder => ({ title: folder, value: folder })),
+        },
+      ])
 
-// Get all date-based directories
-const talks = readdirSync('.')
-  .filter(dir => {
-    const path = resolve(dir)
-    return statSync(path).isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(dir)
-  })
-  .sort()
-  .reverse() // Most recent first
+  args = args.filter(arg => arg !== '-y')
 
-if (talks.length === 0) {
-  console.log('No talks found!')
-  process.exit(1)
+  if (result.folder) {
+    if (args[0] === 'dev')
+      execa('cursor', [fileURLToPath(new URL(`../${result.folder}/src/slides.md`, import.meta.url))])
+    await execa('pnpm', ['run', ...args], {
+      cwd: new URL(`../${result.folder}/src`, import.meta.url),
+      stdio: 'inherit',
+    })
+  }
 }
 
-console.log('Available talks:')
-talks.forEach((talk, index) => {
-  console.log(`${index + 1}. ${talk}`)
-})
-
-// If only one talk, use it directly
-let selectedTalk: string
-if (talks.length === 1) {
-  selectedTalk = talks[0]
-  console.log(`\nUsing only available talk: ${selectedTalk}`)
-} else {
-  // For now, default to the most recent talk
-  // In a full implementation, you'd want to prompt for selection
-  selectedTalk = talks[0]
-  console.log(`\nUsing most recent talk: ${selectedTalk}`)
-}
-
-const srcPath = resolve(selectedTalk, 'src')
-
-console.log(`\nRunning: pnpm run ${command} ${flags.join(' ')} in ${srcPath}`)
-
-try {
-  execSync(`pnpm run ${command} ${flags.join(' ')}`, {
-    cwd: srcPath,
-    stdio: 'inherit'
-  })
-} catch (error) {
-  console.error(`Failed to run command in ${srcPath}`)
-  process.exit(1)
-}
+await startPicker(process.argv.slice(2))
