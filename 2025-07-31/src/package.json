@@ -10,7 +10,6 @@
   "devDependencies": {
     "@slidev/cli": "catalog:",
     "@slidev/theme-default": "catalog:",
-    "@slidev/theme-seriph": "catalog:",
     "@unocss/preset-icons": "catalog:",
     "@iconify-json/logos": "catalog:",
     "@iconify-json/skill-icons": "catalog:",
